@@ -1,6 +1,8 @@
 # S4B_Final_Project
 
-More info about species distribution models, if you want to read up about it: https://rspatial.org/sdm/, https://www.annualreviews.org/doi/full/10.1146/annurev.ecolsys.110308.120159
+More info about species distribution models, if you want to read up about it: 
+tutorial: https://rspatial.org/sdm/, 
+journal paper: https://www.annualreviews.org/doi/full/10.1146/annurev.ecolsys.110308.120159
 
 
 
