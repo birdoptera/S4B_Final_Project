@@ -7,7 +7,6 @@ More info about species distribution models, if you want to read up about it: ht
 Packages needed: 
 
 for data download: 'ridigbio'
-for data management: 'dplyr' and 'tidyr'
 for mapping: 'raster' and 'rgdal' (one of these is hard to install- you may have to go to the cran pages and try to install the dependencies first.)
 
 
