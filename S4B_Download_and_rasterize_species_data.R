@@ -53,8 +53,8 @@ USspeciesdata <- cropspeciesdataSP@data
 #making raster file
 #create empty raster based on cropspeciesdataSP
 #create values to plug into raster files
-#arbitarily chosen cell size- 0.25 is 1/4 of a minute, I think
-cell_size <- 0.25
+#I chose 2.5 minutes of degree arcs because worldclim data comes in that resolution 
+cell_size <- 2.5
 
 #use extent from cropspeciesdataSP
 extent(cropspeciesdataSP)
@@ -67,7 +67,7 @@ ncols <- ((lon_max - lon_min)/cell_size)+1; nrows <- ((lat_max - lat_min)/cell_s
 
 #create an empty raster
 speciesraster <- raster(nrows=nrows, ncols=ncols, xmn=lon_min, xmx=lon_max, ymn=lat_min, ymx=lat_max, 
-                     res=0.25, crs="+proj=longlat +datum=WGS84")
+                     res=2.5, crs="+proj=longlat +datum=WGS84")
 
 #rasterize species data
 speciesraster <- rasterize(USspeciesdata, speciesraster, fun = "count")
