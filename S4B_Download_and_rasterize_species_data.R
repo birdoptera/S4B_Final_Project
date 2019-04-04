@@ -18,6 +18,9 @@ speciesdata <- idig_search_records(rq = list(geopoint=list(type="exists"), genus
 #check your data
 head(speciesdata)
 
+#save it so you don't have to download it all over again
+write.csv(speciesdata, "speciesdata.csv")
+
 ###convert your data into a raster map
 
 #load these packages
@@ -49,6 +52,9 @@ extent(cropspeciesdataSP)
 #saves only the data portion of the shapefile as a dataframe. Basically, the cropped portion of the 
 #original datafile
 USspeciesdata <- cropspeciesdataSP@data
+
+#why not save the file just in case?
+write.csv(USspeciesdata, "USspeciesdata.csv")
 
 #making raster file
 #create empty raster based on cropspeciesdataSP
