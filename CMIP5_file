@@ -1,0 +1,8 @@
+CMIP5 can be downloaded using spatial (R package) -there is a function getData in spatial that can pull from CMIP5 data
+
+since spatial is a package used by people doing species distribution likely a decent package
+
+Check how the literature has responded to the source. Is it good?
+There is a special model we need to specify, which one should we specify as a default
+
+
