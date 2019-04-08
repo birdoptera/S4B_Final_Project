@@ -6,21 +6,26 @@ I've also figured out how to download climatic data (temp, precipitation from wo
 
 What we need to do:
 
-1. Check out my script and see if there's anything in it should be changed
+1. Check out my script and see if there's anything in it should be changed - everyone
 
-2. Start working on a README
+2. Start working on a README - Chloe
 
-3. I got collection data from iDigBio, but GBIF (www.gbif.org) also has collection data you can download with R, it's just a little trickier. Someone can figure that out, or maybe there are other data sources out there?
+3. I got collection data from iDigBio, but GBIF (www.gbif.org) also has collection data you can download with R, it's just a little trickier. Someone can figure that out, or maybe there are other data sources out there? -Iwo
 
-4. Figure out what other niche aspects to use and how to incorporate them into the model. Some ideas: elevation, NPP, solar radiation, soil type, biome, landuse. In reality, niches should be tailored to the species, but this is fast and dirty. The data has to be in a raster file or be convertable into a raster file.
+4. Figure out what other niche aspects to use and how to incorporate them into the model. Some ideas: elevation, NPP, solar radiation, soil type, biome, landuse. In reality, niches should be tailored to the species, but this is fast and dirty. The data has to be in a raster file or be convertable into a raster file. - Gwendolyn
 
-5. Is CMIP5 (https://cmip.llnl.gov/cmip5/) a good source of climate prediction data? What model and 'rcp' should we use? 
+5. Is CMIP5 (https://cmip.llnl.gov/cmip5/) a good source of climate prediction data? What model and 'rcp' should we use? -Chloe
 
-6. There's some modeling people use with species distribution modeling, we might want to look into. The tutorial https://rspatial.org/sdm/ goes into it
+6. There's some modeling people use with species distribution modeling, we might want to look into. The tutorial https://rspatial.org/sdm/ goes into it -Sopa
 
-7. When we have all our niche variables in a nice raster stack, and we've figured out what we do with the modeling, we can use them to create current and future potential niches for our species. Then we can use those to make pretty graphs.
+7. When we have all our niche variables in a nice raster stack, and we've figured out what we do with the modeling, we can use them to create current and future potential niches for our species. Then we can use those to make pretty graphs.-Gabriela
 
-8. Are there other ways we could improve this all? Pipelines and bash etc?
+8. Are there other ways we could improve this all? Pipelines and bash etc? -Everyone
+
+9. Write proposal
+
+10. Begin writing paper
+
 
 Some sources:
 More info about species distribution models, if you want to read up about it: 
