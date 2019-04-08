@@ -14,6 +14,7 @@ library(ridigbio)
 
 ##I think we should be able to pretty easily make this generalizable by allowing the user to input a list (or type in) of genera and species using
 ##variables, then make the call and check a function with user input on if the data is correct and call it with a for loop on the list of genera/species?
+## chloe k.
 #I chose Myzus persicae (pea aphid) because I know it's a common pest and so would have good collection data
 speciesdata <- idig_search_records(rq = list(geopoint=list(type="exists"), genus = "myzus", "data.dwc:specificEpithet" = "persicae"),
                                    fields = c("geopoint"))
@@ -67,7 +68,7 @@ cell_size <- 2.5
 #use extent from cropspeciesdataSP
 extent(cropspeciesdataSP)
 
-#I would say variables that can be input by the user when they call the script defaults that are below
+##I would say variables that can be input by the user when they call the script defaults that are below -chloe k.
 #I'm doing this manually, but there's probably an easy way to code it (x = lon, y = lat)
 lon_min <- -159.77; lon_max <- -68.01; lat_min <- 21.30; lat_max <- 48.43
 
@@ -75,7 +76,7 @@ lon_min <- -159.77; lon_max <- -68.01; lat_min <- 21.30; lat_max <- 48.43
 ncols <- ((lon_max - lon_min)/cell_size)+1; nrows <- ((lat_max - lat_min)/cell_size)+1
 
 #create an empty raster
-#Is res being specified by the same thing as cell size above? If so, just use variable
+##Is res being specified by the same thing as cell size above? If so, just use variable -chloe k.
 speciesraster <- raster(nrows=nrows, ncols=ncols, xmn=lon_min, xmx=lon_max, ymn=lat_min, ymx=lat_max, 
                      res=2.5, crs="+proj=longlat +datum=WGS84")
 
