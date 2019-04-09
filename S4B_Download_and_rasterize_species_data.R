@@ -4,7 +4,7 @@
 
 #load package 
 #(we're not loading them all at once, because sometimes they mask each other)
-install.package("ridigbio")  #run install.papackage if you don't have it
+install.package("ridigbio")  #run install.papackage if you don't have ridigbio library yet
 library(ridigbio)
 
 #search and download data from iDigBio. 
