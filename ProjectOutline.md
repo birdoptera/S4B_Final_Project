@@ -45,21 +45,21 @@ for data download: 'ridigbio'
 for mapping: 'raster' and 'rgdal' (one of these is hard to install- you may have to go to the cran pages and try to install the dependencies first.)
 
 
-Step 1: Obtain collection records
+- Step 1: Obtain collection records
     I'm using a package to download collection records from https://www.idigbio.org/ but https://www.gbif.org/ also has collection records. There's an R package to download it- rgbif- but it's kind of a huge pain, if you want to try to figure it out.
 
-Step 2: Create a raster map from collection records (some nice tutorials about working with raster and shapefiles in R: https://www.neonscience.org/resources/data-tutorials
+- Step 2: Create a raster map from collection records (some nice tutorials about working with raster and shapefiles in R: https://www.neonscience.org/resources/data-tutorials
 
-Step 3: Obtain niche data and identify niches
+- Step 3: Obtain niche data and identify niches
     How are we creating our niches? Really, niches should be species specific. Since I'm using aphids, I probably should be including host plant distribution- but I'm using a generalist, so that may not be such a big issue.
     I'm using worldclim for the climatic data, but I'd like some other data- elevation, biome and/or landuse, solar radiation, NPP, for example. If someone wants to figure out a way to incorporate some, or all of that data.
     
-Step 4: Create a new map, showing the potential niche of the species in the current climate
+- Step 4: Create a new map, showing the potential niche of the species in the current climate
     Otherwise we will be comparing a realized niche map to a potential niche map 
     
-Step 4.5: the tutorial https://rspatial.org/sdm/ gives examples of using models to check accuracy of niche modeling. Should we be incorporating these?
+	 Step 4.5: the tutorial https://rspatial.org/sdm/ gives examples of using models to check accuracy of niche modeling. Should we be incorporating these?
 
-Step 4: Find climate change data and figure out how to use it
+- Step 5: Find climate change data and figure out how to use it
 r package 'raster' function getData allows you to download climate prediction data 'CMIP5' https://cmip.llnl.gov/cmip5/ Not sure how good this data is. It's cool though; it seems to provide the same climatic data as worldclim does, which I think really simplifies the process; we can just create two rasterstacks: the one with the current climate data (worldclim) and the one with the predicted data (CMIP5), and iterate over both to create realized niche maps.
 
-Step 5: Use climate change projections to create new potential niche map
+- Step 6: Use climate change projections to create new potential niche map
