@@ -53,9 +53,6 @@ cropspeciesdataSP <- speciesdataSP[US, ]
 plot(cropspeciesdataSP, pch = '.')
 plot(US, add = TRUE)
 
-#measures max and min lat and lon of species data shapefile
-extent(cropspeciesdataSP)
-
 #saves only the data portion of the shapefile as a dataframe. Basically, the cropped portion of the 
 #original datafile
 USspeciesdata <- cropspeciesdataSP@data
