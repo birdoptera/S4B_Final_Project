@@ -22,9 +22,9 @@ What we need to do:
 
 8. Are there other ways we could improve this all? Pipelines and bash etc? -Everyone
 
-9. Write proposal
+9. Write proposal -Gwendolyn
 
-10. Begin writing paper
+10. Begin writing paper -Everyone
 
 
 Some sources:
