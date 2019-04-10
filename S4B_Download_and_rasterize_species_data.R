@@ -73,7 +73,7 @@ cell_size <- 2.5
 extent(cropspeciesdataSP)
 
 ##I would say variables that can be input by the user when they call the script defaults that are below -chloe k.
-##why don't you go ahead and change that?-GB
+##I don't understand what you mean by that -GB
 #I'm doing this manually, but there's probably an easy way to code it (x = lon, y = lat)
 lon_min <- -159.77; lon_max <- -68.01; lat_min <- 21.30; lat_max <- 48.43
 
