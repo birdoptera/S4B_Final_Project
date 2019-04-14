@@ -121,3 +121,4 @@ speciesraster <- raster(nrows=nrows, ncols=ncols, xmn=lon_min, xmx=lon_max, ymn=
 speciesraster <- rasterize(USspeciesdata, speciesraster, fun = "count")
 
 ##should probably save the raster at this point, but I am not sure how to do that 
+## ¯\_(ツ)_/¯ is writeRaster a potential option? Seems pretty straightforward -Iwo
