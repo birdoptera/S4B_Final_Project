@@ -36,10 +36,10 @@ write.csv(speciesdata, "speciesdata.csv")
 install.packages("rgbif")
 library(rgbif)
 
-#search for all GBIF records of a give "[Genus] [species]"
+#search for all GBIF records of a given "[Genus] [species]"
 ## I included an exaggerated limit of 5000 bc the default is 500 (too low), and the "per request maximum" is 300 -Iwo
 ## I don't understand that part of the help page on CRAN, but "5000" does the trick so I'm sticking with it -Iwo
-datum <- occ_search(scientificName = "Myzus persicae", return = "data",limit="5000"
+datum <- occ_search(scientificName = "Myzus persicae", return = "data",limit="5000")
 
 #format columns to match Ridigbio data
 datum_gbif <- datum[,4:3]
