@@ -18,15 +18,50 @@ library(ridigbio)
 ## chloe k.
 ## There's easier ways to do that then a for function. If you look at the documentation for ridigbio, there are ways to preset
 ## the variables and imput multiple species etc. If you want to change the code to that, please go ahead. -Gwendolyn
+## Not sure where everyone has been working, but I am adding code below that downloads and combines long/lat data from idigbio (with Gwendolyn's code) and GBIF -Iwo
 
 #I chose Myzus persicae (pea aphid) because I know it's a common pest and so would have good collection data
 speciesdata <- idig_search_records(rq = list(geopoint=list(type="exists"), genus = "myzus", "data.dwc:specificEpithet" = "persicae"),
+
                                    fields = c("geopoint"))
 #check your data
 head(speciesdata)
 
 #save it so you don't have to download it all over again
 write.csv(speciesdata, "speciesdata.csv")
+
+## START of Iwo's edits
+
+#install and load package
+install.packages("rgbif")
+library(rgbif)
+
+#search for all GBIF records of a give "[Genus] [species]"
+## I included an exaggerated limit of 5000 bc the default is 500 (too low), and the "per request maximum" is 300 -Iwo
+## I don't understand that part of the help page on CRAN, but "5000" does the trick so I'm sticking with it -Iwo
+datum <- occ_search(scientificName = "Myzus persicae", return = "data",limit="5000"
+
+#format columns to match Ridigbio data
+datum_gbif <- datum[,4:3]
+
+#check your data
+head(datum_gbif)
+
+#rename gbif columns according to idigbio
+## Is this necessary? Not sure -Iwo
+names(datum_gbif) <- names(speciesdata)
+
+#combine idigbio and gbif occurrence records
+datum_combined <- rbind(speciesdata, datum_gbif)
+
+#Remove cases with NA lat/long data
+## Several NAs made it through gbif, probably because my search wasn't sophisticated enough- Iwo
+datum_combined <- datum_combined[complete.cases(datum_combined, ]
+
+#save it so you don't have to download it all over again
+write.csv(datum_combined, "datum_combined.csv")
+
+## END of Iwo's edits 
 
 ###convert your data into a raster map
 
