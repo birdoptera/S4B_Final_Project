@@ -17,8 +17,10 @@ Extract the file "CONUS_brigh.tif" into your working directory.
 
 
 ##Dependencies
-_ has several dependencies that may cause issues during installation.
-
+This script has several dependencies that may cause issues during installation.
+raster
+rgdal
+dismo
 
 
 #Testing
