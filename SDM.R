@@ -1,6 +1,6 @@
 setwd("/home/aubcls67/S4B_Final_Project")
 
-# install needed packages
+#install needed packages
 install.packages(c('raster', 'rgdal', 'dismo', 'rJava')) #
 install.packages("maxnet", dep=TRUE) #MAXENT
 
@@ -59,4 +59,25 @@ plot(glm.map1)
 x11()
 plot(glm.map2)
 points(presence[, c("x","y")] cex=0.1)
+
+# logistic regression:
+gm1 <- glm(pa ~ bio1 + bio5 + bio6 + bio7 + bio8 + bio12 + bio16 + bio17, 
+            family = binomial(link = "logit"), data=envtrain)
+summary(gm1)
+coef(gm1)
+gm2 <- glm(pa ~ bio1+bio5 + bio6 + bio7 + bio8 + bio12 + bio16 + bio17,
+            family = gaussian(link = "identity"), data=envtrain)
+evaluate(testpres, testbackg, gm1)
+ge2 <- evaluate(testpres, testbackg, gm2)
+ge2
+pg <- predict(predictors, gm2, ext=ext)
+par(mfrow=c(1,2))
+plot(pg, main='GLM/gaussian, raw values')
+plot(wrld_simpl, add=TRUE, border='dark grey')
+tr <- threshold(ge2, 'spec_sens')
+plot(pg > tr, main='presence/absence')
+plot(wrld_simpl, add=TRUE, border='dark grey')
+points(pres_train, pch='+')
+points(backg_train, pch='-', cex=0.25)
+
 q()
