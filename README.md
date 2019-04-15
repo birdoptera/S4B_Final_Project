@@ -1,14 +1,15 @@
 This is a README file for *Final Project*
-*description of the scripts*
 
-#Usage
+description of the scripts
 
-#Installation
+# Usage
+
+# Installation
 
 To install the latest version directly from GitHub, go to:
 <https://github.com/birdoptera/S4B_Final_Project>
 
-##Additional Downloads and Instructions
+## Additional Downloads and Instructions
 
 Before running this script, create a temporary working folder and set it as the working directory.
 
@@ -17,13 +18,13 @@ Go to <https://nrcs.app.box.com/v/soils/folder/53525984812> and download the fil
 Extract the file "CONUS_brigh.tif" into your working directory.
 
 
-##Dependencies
+## Dependencies
 This script has several dependencies that may cause issues during installation.
 raster
 rgdal
 dismo
 
 
-#Testing
+# Testing
 
 
