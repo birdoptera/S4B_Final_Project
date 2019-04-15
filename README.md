@@ -1,6 +1,5 @@
-This is a README file for *Final Project*
-
-description of the scripts
+Our final project is a script that will allow you to download the occurance data for a taxa
+and use climactic models to estimate current niche and predict how these will change in the future as a result of climate change.
 
 # Usage
 
