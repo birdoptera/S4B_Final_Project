@@ -11,15 +11,15 @@ For our project we are:
 6. creating maps showing how potential niches will change as a result of climate change
 
 We have the following members in our group:
-Oluwamosope Adeniji
-Gwendolyn Bird
-Gabriela Chavez Calvillo
-Iwo Gross
-Chloe Kaczvinsky
+- Oluwamosope Adeniji
+- Gwendolyn Bird
+- Gabriela Chavez Calvillo
+- Iwo Gross
+- Chloe Kaczvinsky
 
 While we do have more group members than recommended, we think that this many members is necessary because of the complex nature of the project including such difficult and diverse topics as constructing niches, modeling, and creating complex graphs. The (putative) distribution of labor is:
-Project leader and creating niches- Gwendolyn
-Writing the README and validating sources - Chloe
-Checking code and figuring out how to download collection data - Iwo
-Data modeling- Sopa
-Creating potential niche maps - Gabby
+- Project leader and creating niches- Gwendolyn
+- Writing the README and validating sources - Chloe
+- Checking code and figuring out how to download collection data - Iwo
+- Data modeling- Sopa
+- Creating potential niche maps - Gabby
