@@ -56,6 +56,7 @@ res(r.raster) <- .04166667
 
 # change the shapefile into a raster, removing all the monthly data
 solradraster <- rasterize(solrad, r.raster, field = solrad@data$ANN_DNI)
+##so, tried to run it and hit the error that we haven't defined speciesraster earlier -chloe
 solradraster <- solradraster[speciesraster, ]
 
 ### soil type raster from NRCS, STATSTOGO.
