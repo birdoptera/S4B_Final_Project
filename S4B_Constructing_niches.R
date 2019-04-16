@@ -90,6 +90,8 @@ presentclimbrick <- addLayer(presentclimstack, c(elevation, solradraster, soilsr
 # The options are given in the documentation for 'raster'.
 # Again, I'm downloading the same variables as in the present climstack. 
 
+## This might be overkill considering our deadline is imminent, but including prompts to choose (and hard-code) from a selection
+## of rcps, model datasets, and scenario years wouldn't be too difficult.- Iwo 
 
 futureclimstack <- getData('CMIP5', var = 'bio', res = 2.5, rcp = 85, model = 'GF', download = TRUE, 
                         year = '50')
@@ -110,13 +112,13 @@ backgrounddata <- randomPoints(presentclimbrick, 500)
 backgroundvalues <- extract(presentclimbrick, backgrounddata)
 presencebackground <- c(rep(1, nrow(speciespresent)), rep(0, nrow(backgroundvalues)))
 
-# make a new data frame of the occurance values and the background values 
+# make a new data frame of the occurrence values and the background values 
 speciesdistdata <- data.frame(cbind(presencebackground, rbind(speciespresent, backgroundvalues)))
 
-# save the dataframe of both occurance values and background values
+# save the dataframe of both occurrence values and background values
 saveRDS(speciesdistdata, "sdm.Rds")
 
-# save just the occurance values
+# save just the occurrence values
 saveRDS(speciespresent, "presencevalues.Rds")
 
 #move 'sdm', 'presencevalues' and 'futureclimbrick' from temporary folder before deleting it!!!
