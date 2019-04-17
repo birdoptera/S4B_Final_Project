@@ -20,7 +20,7 @@ Then, move the file "CONUS_brigh.tif" into your working directory.
 
 
 ## Dependencies
-This script has several dependencies that may cause issues during installation.
+This script has several dependencies that will be installed through the script. These include:
 
 raster
 
