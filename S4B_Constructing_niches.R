@@ -26,7 +26,7 @@ library(dismo)
 # set it as your working directory. This will also make it easier to delete the downloads when you are done.
 
 # Before you begin, go to https://nrcs.app.box.com/v/soils/folder/53525984812 and download the file soil_color_CONUS_v2.zip. 
-#Extract the file "CONUS_brigh.tif" into your working directory.
+# Extract the file "CONUS_brigh.tif" into your working directory.
 
 # elevation data (source: the data is from NASA, processed by CGIAR-CSI http://srtm.csi.cgiar.org/)
 
