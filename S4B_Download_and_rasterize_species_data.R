@@ -7,11 +7,6 @@
 install.packages("ridigbio")  #run install.papackages if you don't have ridigbio library yet
 library(ridigbio)
 
-##ok, ran this script and it errored out here with the message:
-##Error in loadNamespace(j <- i[[1L]], c(lib.loc, .libPaths()), versionCheck = vI[[j]]) : 
-##  namespace ‘curl’ 3.2 is already loaded, but >= 3.3 is required
-##does anyone know what went wrong here and how we can fix it -chloe
-
 #search and download data from iDigBio. 
 #replace 'genus' and 'specificEpithet' with the species you want. You can get rid of 'specificEpithet' if you just want to use
 #genus- you can also use higher taxa if you want to; use 'data.dwc:family' or 'data.dwc:order'. Don't be tempted to use
@@ -44,6 +39,11 @@ write.csv(datum_idigbio, "datum_idigbio.csv")
 #install and load package
 install.packages("rgbif")
 library(rgbif)
+
+##ok, ran this script and it errored out here with the message:
+##Error in loadNamespace(j <- i[[1L]], c(lib.loc, .libPaths()), versionCheck = vI[[j]]) : 
+##  namespace ‘curl’ 3.2 is already loaded, but >= 3.3 is required
+##does anyone know what went wrong here and how we can fix it -chloe
 
 #search for all GBIF records of a given "[Genus] [species]"
 ## I included an exaggerated limit of 5000 bc the default is 500 (too low), and the "per request maximum" is 300 -Iwo
