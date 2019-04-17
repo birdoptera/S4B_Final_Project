@@ -94,8 +94,16 @@ presentclimbrick <- addLayer(presentclimstack, c(elevation, solradraster, soilsr
 ## This might be overkill considering our deadline is imminent, but including prompts to choose (and hard-code) from a selection
 ## of rcps, model datasets, and scenario years wouldn't be too difficult.- Iwo 
 
-futureclimstack <- getData('CMIP5', var = 'bio', res = 2.5, rcp = 85, model = 'GF', download = TRUE, 
-                        year = '50')
+#Trying to include a promp to choose from a selection of rcp and time -Gabby
+
+year <- readline(prompt= "Enter a time where you want the model to be projected: ")
+rcp <- readline(prompt= "Model of how much greenhouse gases are emitted: ")
+
+futureclimstack <- getData('CMIP5', var = 'bio', res = 2.5, rcp = sprinf("%s", rcp), model = 'GF', download = TRUE, 
+                        year = sprinf("%s", rcp))
+#Non modified line
+#futureclimstack <- getData('CMIP5', var = 'bio', res = 2.5, rcp = 85, model = 'GF', download = TRUE, 
+#			year = '50')
 futureclimstack <- resample(futureclimstack, r.raster)
 crs(futureclimstack) <- crs(solradraster)
 futureclimstack <- crop(futureclimstack, elevation)
