@@ -4,7 +4,7 @@
 
 #load package 
 #(we're not loading them all at once, because sometimes they mask each other)
-install.packages("ridigbio")  #run install.papackages if you don't have ridigbio library yet
+# install.packages("ridigbio")  #run install.papackages if you don't have ridigbio library yet
 library(ridigbio)
 
 #search and download data from iDigBio. 
@@ -37,7 +37,7 @@ write.csv(datum_idigbio, "datum_idigbio.csv")
 ## START of Iwo's edits
 
 #install and load package
-install.packages("rgbif")
+# install.packages("rgbif")
 library(rgbif)
 
 #search for all GBIF records of a given "[Genus] [species]"
