@@ -13,14 +13,7 @@ library(ridigbio)
 #'data.dwc:scientifiName'- that category seems to be full of errors. If you do use a higher order, you might want to add
 #'genus' and 'specificEpithet' to the 'fields' to check for errors.
 
-##I think we should be able to pretty easily make this generalizable by allowing the user to input a list (or type in) of genera and species using
-##variables, then make the call and check a function with user input on if the data is correct and call it with a for loop on the list of genera/species?
-## chloe k.
-## There's easier ways to do that then a for function. If you look at the documentation for ridigbio, there are ways to preset
-## the variables and imput multiple species etc. If you want to change the code to that, please go ahead. -Gwendolyn
-## Not sure where everyone has been working, but I am adding code below that downloads and combines long/lat data from idigbio (with Gwendolyn's code) and GBIF -Iwo
-
-#Prompt and hard-code [genus] [species] names
+#Prompt for genus and species
 genus <- readline(prompt= "Enter a genus name: ")
 species <- readline(prompt= "Enter a species name: ")
 
@@ -39,11 +32,6 @@ write.csv(datum_idigbio, "datum_idigbio.csv")
 #install and load package
 # install.packages("rgbif")
 library(rgbif)
-
-##ok, ran this script and it errored out here with the message:
-##Error in loadNamespace(j <- i[[1L]], c(lib.loc, .libPaths()), versionCheck = vI[[j]]) : 
-##  namespace ‘curl’ 3.2 is already loaded, but >= 3.3 is required
-##does anyone know what went wrong here and how we can fix it -chloe
 
 #search for all GBIF records of a given "[Genus] [species]"
 ## I included an exaggerated limit of 5000 bc the default is 500 (too low), and the "per request maximum" is 300 -Iwo
@@ -111,8 +99,6 @@ cell_size <- 2.5
 #use extent from cropspeciesdataSP
 extent(cropspeciesdataSP)
 
-##I would say variables that can be input by the user when they call the script defaults that are below -chloe k.
-##I don't understand what you mean by that -GB
 #I'm doing this manually, but there's probably an easy way to code it (x = lon, y = lat)
 lon_min <- -159.77; lon_max <- -68.01; lat_min <- 21.30; lat_max <- 48.43
 
