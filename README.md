@@ -1,8 +1,6 @@
 Our final project is a script that will allow you to download the occurance data for a taxa
 and use climactic models to estimate current niche and predict how these will change in the future as a result of climate change.
 
-# Usage
-
 # Installation
 
 To install the latest version directly from GitHub, go to:
