@@ -40,6 +40,11 @@ write.csv(datum_idigbio, "datum_idigbio.csv")
 # install.packages("rgbif")
 library(rgbif)
 
+##ok, ran this script and it errored out here with the message:
+##Error in loadNamespace(j <- i[[1L]], c(lib.loc, .libPaths()), versionCheck = vI[[j]]) : 
+##  namespace ‘curl’ 3.2 is already loaded, but >= 3.3 is required
+##does anyone know what went wrong here and how we can fix it -chloe
+
 #search for all GBIF records of a given "[Genus] [species]"
 ## I included an exaggerated limit of 5000 bc the default is 500 (too low), and the "per request maximum" is 300 -Iwo
 ## I don't understand that part of the help page on CRAN, but "5000" does the trick so I'm sticking with it -Iwo
