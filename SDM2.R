@@ -18,6 +18,7 @@ bioclim.data <- getData(name = "worldclim",
                         path = "data/")
 
 # Read in speciesdata
+# code below needs adjust to source for data. Not sure which one to use.
 obs.data <- read.csv(file = "data/speciesdata.csv")
 
 # Drop any rows with NAs
@@ -109,3 +110,45 @@ points(x = obs.data$longitude,
 # Redraw country borders
 plot(wrld_simpl, add = TRUE, border = "grey5")
 box()
+
+# Trying logistic regression
+presvals <- readRDS("presencevalues.Rds")
+#prediction
+bio1 = c(40, 150, 200)
+bio5 = c(60, 115, 290)
+bio12 = c(600, 1600, 1700)
+pd = data.frame(cbind(bio1, bio5, bio12))
+predict(bc, pd)
+response(bc)
+# the code below needs adjustment
+predictors <- stack(list.files(file.path(system.file(package="dismo"), 'ex'), pattern='grd$', full.names=TRUE ))
+names(predictors)
+glm.map1<- predict(predictors, bc)
+#plot
+plot(glm.map1)
+
+presvals <- extract(predictors, speciesdata)
+set.seed(0)
+backgr <- randomPoints(predictors, 500)
+nr <- nrow(speciesdata)
+s <- sample(nr, 0.25 * nr)
+train <- rbind(presence.train, background.train)
+envtrain <- extract(predict, train)
+gm1 <- glm(pa ~ bio1 + bio5 + bio6 + bio12, family = binomial(link = "logit"), data=envtrain)
+summary(gm1)
+coef(gm1)
+gm1 <- glm(pa ~ bio1+ bio5 + bio12 + bio16 + bio17,
+            family = gaussian(link = "identity"), data=envtrain)
+evaluate(testpres, testbackg, gm1)     
+ge2 <- evaluate(testpres, testbackg, gm2)
+ge2
+pg <- predict(predictors, gm2, ext=ext)               
+par(mfrow=c(1,2))
+plot(pg, main='GLM/gaussian, raw values')
+plot(wrld_simpl, add=TRUE, border='dark grey')          
+tr <- threshold(ge2, 'spec_sens')
+plot(pg > tr, main='presence/absence')
+plot(wrld_simpl, add=TRUE, border='dark grey')                  
+points(pres_train, pch='+')
+points(backg_train, pch='-', cex=0.25)
+
