@@ -18,7 +18,7 @@ Then, move the file "CONUS_brigh.tif" into your working directory.
 
 
 ## Dependencies
-This script has several dependencies that will be installed through the script. These include:
+This script has several R-package dependencies that need to be installed. Please install them before running the script:
 
 ridigbio
 
