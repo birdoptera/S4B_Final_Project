@@ -169,9 +169,12 @@ res(r.raster) <- .04166667
 
 # download elevation data and modify the raster grid. We're going to need to modify all of the rasters so that
 # when we layer them on top of each other, they'll match up
-elevation <- getData('alt', download = TRUE, country= 'USA')
-elevation <- (elevation[[4]])
-elevation <- resample(elevation, r.raster)
+# this code worked line-by-line but did not work when run all at once, so I've replace it with loading these files
+
+# elevation <- getData('alt', download = TRUE, country= 'USA')
+# elevation <- (elevation[[4]])
+# elevation <- resample(elevation, r.raster)
+elevation <- raster("elevation")
 
 ### solar radiation data (source: National Renewable Energy Laboratory)
 
