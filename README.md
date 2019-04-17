@@ -1,5 +1,7 @@
-Our final project is a script that will allow you to download the occurance data for a taxa
-and use climactic models to estimate current niche and predict how these will change in the future as a result of climate change.
+Our final project is a script that will allow you to download the occurence data for a taxa
+and use climactic models to estimate current niche and predict how these will change in the future as a result of climate change. 
+
+Please note: in its current state, this script will only work for species distributions within the continental US.
 
 # Installation
 
@@ -30,7 +32,39 @@ rgdal
 
 dismo
 
+The file "CONUS_brigh.tif" should be in the GitHub files and download with the code. This is a color map of soil in the US. 
+Therefore, this script is only applicable in its current state to species (and their niches) within the US.
+
+## Default Models and Climate Data
+
+We're sourcing our climate projection data from CMIP5, the Coupled Model Intercomparison Project
+This specifically uses the GFDL data set from NOAA, with the representative concentration pathway (rcp) (how
+severe the climate change is expected to be based on how much greenhouse gases are emitted.
+85 is the most extreme projection), with the year set to 50. There are other models, rcp, and year available,
+The options are given in the documentation for 'raster' and can be altered within the script to suit your purposes.
+
 
 # Testing
+
+Before beginning testing, install the above dependencies in R 3.5.1. Then run the script in R. There will be a prompt
+asking for the genus and species of the species you wish to examine. For this test, use Myzus persicae, a species with 
+good collection data.
+
+The first step in this script is gathering species occurence data from iDigBio and GBIF. We recommend testing that this data
+is sufficient for your purposes before running the full script.
+
+Next niche information (such as soil type and landuse) is downloaded for the US. Again, this script is specifically for the US 
+since much of this data is segmented by country. This information is then converted to a raster files (which are functionally maps
+that are saved by coded pixels) for further use.
+
+The script then sets specifications and downloads data for these climate variables before modifying them to be consistent
+with each other:
+
+solar radiation data (source: National Renewable Energy Laboratory)
+
+soil type raster from NRCS, STATSTOGO.
+
+Climate predictions are being used through WorldClim for present data and CMIP5 for future predictions,
+since they use the same variables and can be used to make comparisons.
 
 
