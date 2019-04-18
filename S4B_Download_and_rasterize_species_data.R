@@ -51,7 +51,7 @@ datum_gbif <- occ_search(scientificName = sprintf("%s %s", genus, species), coun
 #check your data
 head(datum_gbif)
 
-print(data.frame("gbif finished", row.names=""))
+cat("gbif finished /n")
 
 #rename gbif columns according to idigbio
 ## Is this necessary? Not sure -Iwo
@@ -67,7 +67,7 @@ speciesdata <- speciesdata[complete.cases(speciesdata), ]
 #save it so you don't have to download it all over again
 write.csv(speciesdata, "speciesdata.csv")
 
-print(data.frame("speciesdata finished", row.names=""))
+cat("speciesdata finished /n")
 
 ## END of Iwo's edits 
 
