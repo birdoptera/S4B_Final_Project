@@ -14,8 +14,13 @@ library(ridigbio)
 #'genus' and 'specificEpithet' to the 'fields' to check for errors.
 
 #Prompt for genus and species
-genus <- readline(prompt= "Enter a genus name: ")
-species <- readline(prompt= "Enter a species name: ")
+## the original code for this wasn't working in my terminal, so I switched it to this and commented out the originals
+cat("Enter a genus name: ")
+genus <- readLines("stdin", n=1)
+cat("Enter a species name: ")
+species <- readLines("stdin", n=1)
+##genus <- readline(prompt= "Enter a genus name: ")
+##species <- readline(prompt= "Enter the species part of a species name: ")
 
 #I chose Myzus persicae (pea aphid) because I know it's a common pest and so would have good collection data 
 ## I added hard-coded nomenclature variables and a limit parameter. The latter probably isn't necessary since idigbio is a smaller database, but it might save time for larger species datasets -Iwo
@@ -113,8 +118,8 @@ speciesraster <- raster(nrows=nrows, ncols=ncols, xmn=lon_min, xmx=lon_max, ymn=
 #rasterize species data
 speciesraster <- rasterize(USspeciesdata, speciesraster, fun = "count")
 
-##should probably save the raster at this point, but I am not sure how to do that 
-## ¯\_(ツ)_/¯ is writeRaster a potential option? Seems pretty straightforward -Iwo
+# save the data to the drive
+writeRaster(speciesraster, "species_raster", overwrite=TRUE)
 #load packages
 library(raster)
 library(rgdal)
@@ -165,27 +170,32 @@ elevation <- raster("elevation")
 ### solar radiation data (source: National Renewable Energy Laboratory)
 
 # make a temporary file, download the data, and unzip it
-tmp <- tempfile()
-download.file("https://www.nrel.gov/gis/assets/data/us9809_dni_updated.zip", destfile = tmp)
-unzip(tmp, exdir = ".")
+## this worked in RStudio, but isn't working on the ASC (I think it just takes too long, so I'm just going to put it in the github 
+##tmp <- tempfile()
+##download.file("https://www.nrel.gov/gis/assets/data/us9809_dni_updated.zip", destfile = tmp)
+##unzip(tmp, exdir = ".")
 
 # read in the shapefile and modify the raster template
-solrad <- readOGR(dsn= ".", "us9809_dni_updated")
-extent(r.raster) <- extent(solrad)
-res(r.raster) <- .04166667
+##solrad <- readOGR(dsn= ".", "us9809_dni_updated")
+##extent(r.raster) <- extent(solrad)
+##res(r.raster) <- .04166667
 
 # change the shapefile into a raster, removing all the monthly data
-solradraster <- rasterize(solrad, r.raster, field = solrad@data$ANN_DNI)
-##so, tried to run it and hit the error that we haven't defined speciesraster earlier -chloe
-solradraster <- solradraster[speciesraster, ]
+##solradraster <- rasterize(solrad, r.raster, field = solrad@data$ANN_DNI)
+##solradraster <- solradraster[speciesraster, ]
+
+solradraster <- raster("solradraster")
 
 ### soil type raster from NRCS, STATSTOGO.
 
-# load the 
-soilsraster <- raster("CONUS_brigh.tif")
-soilsraster <- projectRaster(soilsraster, crs=crs(solradraster))
-soilsraster <- resample(soilsraster, r.raster)
+## Because of the difficulty of working with the soils data, I have produced raster files we can just fit in
 
+# load the soils data
+#soilsraster <- raster("CONUS_brigh.tif")
+#soilsraster <- projectRaster(soilsraster, crs=crs(solradraster))
+#soilsraster <- resample(soilsraster, r.raster)
+
+soilsraster <- raster("soilsraster")
 
 ### bio is a raster stack which includes all of the 12 worldclim variables, all of them having to do with
 # temperature and precipitation. These are the variables we're going to use as climate data. The 'CMIP5' data
@@ -200,9 +210,10 @@ crs(presentclimstack) <- crs(solradraster)
 # crop to the size of the other rasterlayers
 presentclimstack <- crop(presentclimstack, elevation)
 # add other layers to raster stack
+## this line is changed because it relied on the soildata
 presentclimbrick <- addLayer(presentclimstack, c(elevation, solradraster, soilsraster))
-
-
+#presentclimbrick <- addLayer(presentclimstack, c(elevation, solradraster))
+writeRaster(presentclimbrick, "presentclimbrick", overwrite = TRUE)
 
 ### We're sourcing our climate projection data from CMIP5, the Coupled Model Intercomparison Project
 # I've chosen to use the GFDL data set from NOAA, with the representative concentration pathway (rcp) (how
@@ -219,10 +230,11 @@ futureclimstack <- getData('CMIP5', var = 'bio', res = 2.5, rcp = 85, model = 'G
 futureclimstack <- resample(futureclimstack, r.raster)
 crs(futureclimstack) <- crs(solradraster)
 futureclimstack <- crop(futureclimstack, elevation)
+## again changed so we don't have to worry about soilsraster
 futureclimbrick <- addLayer(futureclimstack, c(elevation, solradraster, soilsraster))
-
+#futureclimbrick <- addLayer(futureclimbrick, c(elevation, solradraster))
 # write to file so you can use later. This is actually going to write two files and you're going to need both.
-writeRaster(futureclimbrick, "futureclimbrick")
+writeRaster(futureclimbrick, "futureclimbrick", overwrite = TRUE)
 
 ### Make a dataframe of the niche values at each occurance point 
 speciespresent <- extract(presentclimbrick, USspeciesdata) 
@@ -240,6 +252,6 @@ speciesdistdata <- data.frame(cbind(presencebackground, rbind(speciespresent, ba
 saveRDS(speciesdistdata, "sdm.Rds")
 
 # save just the occurrence values
-saveRDS(speciespresent, "presencevalues.Rds")
+saveRDS(speciespresent, "pvals.Rds")
 
 #move 'sdm', 'presencevalues' and 'futureclimbrick' from temporary folder before deleting it!!!
