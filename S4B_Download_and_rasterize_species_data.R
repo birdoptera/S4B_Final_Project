@@ -235,8 +235,6 @@ cat("present bioclim stack altered", fill=TRUE)
 
 # add other layers to raster stack
 
-
-## this line is changed because it relied on the soildata
 presentclimbrick <- addLayer(presentclimstack, c(elevation, solradraster, soilsraster))
 
 writeRaster(presentclimbrick, "presentclimbrick", overwrite = TRUE)
@@ -266,6 +264,8 @@ cat("future clim data altered", fill=TRUE)
 
 futureclimbrick <- addLayer(futureclimstack, c(elevation, solradraster, soilsraster))
 
+names(futureclimbrick) <- names(presentclimbrick)
+
 cat("future brick completed", fill=TRUE)
 
 # write to file so you can use later. This is actually going to write two files and you're going to need both.
@@ -292,3 +292,25 @@ saveRDS(speciesdistdata, "sdm.Rds")
 saveRDS(speciespresent, "pvals.Rds")
 
 #move 'sdm', 'presencevalues' and 'futureclimbrick' from temporary folder before deleting it!!!
+
+#run a generalized linear model (we're running it with 5 factors: bio1 = annual mean temperature,
+# bio 12 = annual precipitation, USA1_msk_alt = elevation, layer = solar radiation, and CONUS_brigh = soil types)
+## these names are terrible. To change them you have to change the names of the climbricks
+
+m1 <- glm(presencebackground ~ bio1 + bio12 + USA1_msk_alt + layer + CONUS_brigh, data = speciesdistdata)
+
+
+
+#map the present possible distribution            
+p <- predict(presentclimbrick, m1)            
+#figure out a way to output plots
+plot(p)            
+
+#map the future possible distribution
+f <- predict(futureclimbrick, m1)            
+plot(f)            
+
+#maybe find a way to plot the occurance data on both plots?
+
+#maybe we could do some kind of model evaluation? like splitting the data into 2 parts, running one and trying to use that to predict the other?
+
