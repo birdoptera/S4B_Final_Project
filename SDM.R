@@ -1,14 +1,13 @@
 #install needed packages
-install.packages(c('raster', 'rgdal', 'dismo', 'rJava'))
-install.packages("maxnet", dep=TRUE) #MAXENT 
+install.packages(c('raster', 'rgdal', 'dismo', 'rJava', 'ROCR')) 
 
-library(maxnet)
 library(dismo)
 library(raster)
 library(maptools)
 library(sp)
 library(rgdal)
-library(rJava)
+library(ROCR)
+
 
 #load presences and predictors
 
@@ -19,6 +18,14 @@ USspeciesdata <- read.csv(file="USspeciesdata.csv", header=TRUE, sep=",")
 #################################################################
 #GENERALIZED LINEAR MODELS (GLM)
 #################################################################
+# run a generalized linear model on sdmdata.
+
+m1 <- glm(pb ~ bio1 + bio5 + bio12, data=sdmdata)
+class(m1)
+summary(m1)
+m2 = glm(pb ~ ., data=sdmdata)
+m2
+
 
 #presencevalues.Rds data
 
@@ -28,19 +35,20 @@ bc
 pairs(bc)
 
 
-#prediction
+#predict model
 bio1 = c(40, 150, 200)
 bio5 = c(60, 115, 290)
 bio12 = c(600, 1600, 1700)
 pd = data.frame(cbind(bio1, bio5, bio12))
-predict(bc, pd)
-response(bc)
+pd
+predict(m1, pd)
+response(m1)
 predictors <- stack(list.files(file.path(system.file(package="dismo"), 'ex'), pattern='grd$', full.names=TRUE ))
 names(predictors)
-glm.map1<- predict(predictors, bc)
-#plot
-plot(glm.map1)
+p <- predict(predictors, m1)
+plot(p)
 
+#evaluate model
 p <- rnorm(50, mean=0.7, sd=0.3)
 a <- rnorm(50, mean=0.4, sd=0.4)
 par(mfrow=c(1, 2))
@@ -66,6 +74,7 @@ par(mfrow=c(1, 2))
 density(e)
 boxplot(e, col=c('blue', 'red'))
 
+#We will divide the data in two random sets, one for training a Bioclim model, and one for evaluating the model.
 samp <- sample(nrow(sdmdata), round(0.75 * nrow(sdmdata)))
 traindata <- sdmdata[samp,]
 traindata <- traindata[traindata[,1] == 1, 2:9]
@@ -95,7 +104,10 @@ auc <- sapply(e, function(x){x@auc})
 auc
 mean(auc)
 sapply( e, function(x){ threshold(x)['spec_sens'] } )
-#file <- file.path(system.file(package="dismo"), "USspeciesdata.csv")
+
+#Using AUC in evaluating SDM
+
+file <- file.path(system.file(package="dismo"), "USspeciesdata.csv")
 USspeciesdata <- read.table(file,  header=TRUE,  sep=',')
 USspeciesdata <- USspeciesdata[,-1]
 presvals <- extract(predictors, USspeciesdata)
@@ -119,6 +131,8 @@ back_test_pwd <- back_test[na.omit(as.vector(i)), ]
 sb2 <- ssb(pres_test_pwd, back_test_pwd, pres_train)
 sb2[1]/ sb2[2]
 
+
+#Bioclim modelling
 bc <- bioclim(predictors, pres_train)
 evaluate(bc, p=pres_test, a=back_test, x=predictors)
 evaluate(bc, p=pres_test_pwd, a=back_test_pwd, x=predictors)
