@@ -50,6 +50,9 @@ Before beginning testing, install the above dependencies in R 3.5.1. Then run th
 asking for the genus and species of the species you wish to examine. For this test, use Myzus persicae, a species with 
 good collection data.
 
+After each step and package there should have readout indicating which step has completed to allow for easier alterations 
+to the script to help customization.
+
 The first step in this script is gathering species occurence data from iDigBio and GBIF. We recommend testing that this data
 is sufficient for your purposes before running the full script.
 
