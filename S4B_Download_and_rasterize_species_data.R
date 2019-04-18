@@ -34,8 +34,6 @@ head(datum_idigbio)
 #save it so you don't have to download it all over again
 write.csv(datum_idigbio, "datum_idigbio.csv")
 
-## START of Iwo's edits
-
 #install and load package
 # install.packages("rgbif")
 library(rgbif)
@@ -45,30 +43,23 @@ library(rgbif)
 ##  namespace ‘curl’ 3.2 is already loaded, but >= 3.3 is required
 ##does anyone know what went wrong here and how we can fix it -chloe
 
-#search for all GBIF records of a given "[Genus] [species]"
-## I included an exaggerated limit of 5000 bc the default is 500 (too low), and the "per request maximum" is 300 -Iwo
-## I don't understand that part of the help page on CRAN, but "5000" does the trick so I'm sticking with it -Iwo
-## I figured it out. This is a better command: hard-coded variables, returns up to 5000 records with long/lat data only, not necessary to remove NA cases later -Iwo
+#search for all GBIF records of a given "[Genus] [species]". Returns a long/lat matrix with up to 5000 results, including US records with location data (no NAs) only
 datum_gbif <- occ_search(scientificName = sprintf("%s %s", genus, species), country= "us", return = "data",limit="5000", hasCoordinate=TRUE, fields=c('decimalLongitude','decimalLatitude'))
 
 #check your data
 head(datum_gbif)
 
 #rename gbif columns according to idigbio
-## Is this necessary? Not sure -Iwo
 names(datum_gbif) <- names(datum_idigbio)
 
 #combine idigbio and gbif occurrence records
 speciesdata <- rbind(datum_idigbio, datum_gbif)
 
 #Remove cases with NA lat/long data
-## This is probably no longer necessary for gbif, but it might catch NAs from idigbio -Iwo
 speciesdata <- speciesdata[complete.cases(speciesdata), ]
 
 #save it so you don't have to download it all over again
 write.csv(speciesdata, "speciesdata.csv")
-
-## END of Iwo's edits 
 
 ###convert your data into a raster map
 
