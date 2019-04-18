@@ -15,9 +15,9 @@ library(ridigbio)
 
 #Prompt for genus and species
 ## the original code for this wasn't working in my terminal, so I switched it to this and commented out the originals
-print("Enter a genus name: ")
+cat("Enter a genus name: ")
 genus <- readLines("stdin", n=1)
-print("Enter a species name: ")
+cat("Enter a species name: ")
 species <- readLines("stdin", n=1)
 ##genus <- readline(prompt= "Enter a genus name: ")
 ##species <- readline(prompt= "Enter the species part of a species name: ")
@@ -34,7 +34,7 @@ head(datum_idigbio)
 write.csv(datum_idigbio, "datum_idigbio.csv")
 
 # these are inserts to let you know where the file stopped working
-print("idigbio finished")
+print(data.frame("message" = "idigbio finished", row.names =""))
 
 ## START of Iwo's edits
 
@@ -51,7 +51,7 @@ datum_gbif <- occ_search(scientificName = sprintf("%s %s", genus, species), coun
 #check your data
 head(datum_gbif)
 
-print("gbif finished")
+print(data.frame("message" = "gbif finished", row.names=""))
 
 #rename gbif columns according to idigbio
 ## Is this necessary? Not sure -Iwo
@@ -67,7 +67,7 @@ speciesdata <- speciesdata[complete.cases(speciesdata), ]
 #save it so you don't have to download it all over again
 write.csv(speciesdata, "speciesdata.csv")
 
-print("speciesdata finished")
+print(data.frame("message"="speciesdata finished", row.names=""))
 
 ## END of Iwo's edits 
 
