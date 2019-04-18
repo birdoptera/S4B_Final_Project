@@ -99,8 +99,8 @@ presentclimbrick <- addLayer(presentclimstack, c(elevation, solradraster, soilsr
 year <- readline(prompt= "Enter a time where you want the model to be projected: ")
 rcp <- readline(prompt= "Model of how much greenhouse gases are emitted: ")
 
-futureclimstack <- getData('CMIP5', var = 'bio', res = 2.5, rcp = sprinf("%s", rcp), model = 'GF', download = TRUE, 
-                        year = sprinf("%s", rcp))
+futureclimstack <- getData('CMIP5', var = 'bio', res = 2.5, rcp = sprintf("%s", rcp), model = 'GF', download = TRUE, 
+                        year = sprintf("%s", year))
 #Non modified line
 #futureclimstack <- getData('CMIP5', var = 'bio', res = 2.5, rcp = 85, model = 'GF', download = TRUE, 
 #			year = '50')
