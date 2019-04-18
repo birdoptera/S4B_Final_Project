@@ -34,7 +34,7 @@ head(datum_idigbio)
 write.csv(datum_idigbio, "datum_idigbio.csv")
 
 # these are inserts to let you know where the file stopped working
-print(data.frame("idigbio finished", row.names =""))
+cat("idigbio finished" /n)
 
 ## START of Iwo's edits
 
@@ -51,7 +51,7 @@ datum_gbif <- occ_search(scientificName = sprintf("%s %s", genus, species), coun
 #check your data
 head(datum_gbif)
 
-cat("gbif finished /n")
+cat("gbif finished" /n)
 
 #rename gbif columns according to idigbio
 ## Is this necessary? Not sure -Iwo
@@ -67,7 +67,7 @@ speciesdata <- speciesdata[complete.cases(speciesdata), ]
 #save it so you don't have to download it all over again
 write.csv(speciesdata, "speciesdata.csv")
 
-cat("speciesdata finished /n")
+cat("speciesdata finished" /n)
 
 ## END of Iwo's edits 
 
