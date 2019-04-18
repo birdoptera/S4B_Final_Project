@@ -167,12 +167,12 @@ library(dismo)
 
 # elevation data (source: the data is from NASA, processed by CGIAR-CSI http://srtm.csi.cgiar.org/)
 
-##none of this is necessary if we're just importing in files
+
 # make a raster template
-# require(raster)
-# r.raster <- raster()
-# extent(r.raster) <- c(-161, -66.9, 18, 49.4)
-# res(r.raster) <- .04166667
+ require(raster)
+ r.raster <- raster()
+ extent(r.raster) <- c(-161, -66.9, 18, 49.4)
+ res(r.raster) <- .04166667
 
 # download elevation data and modify the raster grid. We're going to need to modify all of the rasters so that
 # when we layer them on top of each other, they'll match up
