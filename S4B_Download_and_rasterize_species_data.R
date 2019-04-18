@@ -15,9 +15,9 @@ library(ridigbio)
 
 #Prompt for genus and species
 ## the original code for this wasn't working in my terminal, so I switched it to this and commented out the originals
-cat("Enter a genus name: ")
+print("Enter a genus name: ")
 genus <- readLines("stdin", n=1)
-cat("Enter a species name: ")
+print("Enter a species name: ")
 species <- readLines("stdin", n=1)
 ##genus <- readline(prompt= "Enter a genus name: ")
 ##species <- readline(prompt= "Enter the species part of a species name: ")
@@ -34,7 +34,7 @@ head(datum_idigbio)
 write.csv(datum_idigbio, "datum_idigbio.csv")
 
 # these are inserts to let you know where the file stopped working
-cat("idigbio finished")
+print("idigbio finished")
 
 ## START of Iwo's edits
 
@@ -51,7 +51,7 @@ datum_gbif <- occ_search(scientificName = sprintf("%s %s", genus, species), coun
 #check your data
 head(datum_gbif)
 
-cat("gbif finished")
+print("gbif finished")
 
 #rename gbif columns according to idigbio
 ## Is this necessary? Not sure -Iwo
@@ -67,7 +67,7 @@ speciesdata <- speciesdata[complete.cases(speciesdata), ]
 #save it so you don't have to download it all over again
 write.csv(speciesdata, "speciesdata.csv")
 
-cat("speciesdata finished")
+print("speciesdata finished")
 
 ## END of Iwo's edits 
 
@@ -83,11 +83,11 @@ library(rgdal)
 US <- getData('GADM', country = 'USA', level=1)
 
 
-cat("US map downloaded")
+print("US map downloaded")
 #creating shapefile from speciesdata. Lat and lon are switched. CRS of US map is applied to species data
 speciesdataSP <- SpatialPointsDataFrame(speciesdata[,1:2], speciesdata, proj4string = crs(US))
 
-cat("shapefile created")
+print("shapefile created")
 #plot species data against US map
 plot(speciesdataSP)
 plot(US, add = TRUE)
@@ -107,7 +107,7 @@ USspeciesdata <- cropspeciesdataSP@data
 #why not save the file just in case?
 write.csv(USspeciesdata, "USspeciesdata.csv")
 
-cat("USspecies data created")
+print("USspecies data created")
 #making raster file
 #create empty raster based on cropspeciesdataSP
 #create values to plug into raster files
@@ -127,14 +127,14 @@ ncols <- ((lon_max - lon_min)/cell_size)+1; nrows <- ((lat_max - lat_min)/cell_s
 ##Is res being specified by the same thing as cell size above? If so, just use variable -chloe k.
 speciesraster <- raster(nrows=nrows, ncols=ncols, xmn=lon_min, xmx=lon_max, ymn=lat_min, ymx=lat_max, 
                      res=cell_size, crs="+proj=longlat +datum=WGS84")
-cat("empty raster created")
+print("empty raster created")
 #rasterize species data
 speciesraster <- rasterize(USspeciesdata, speciesraster, fun = "count")
 
 # save the data to the drive
 writeRaster(speciesraster, "species_raster", overwrite=TRUE)
 
-cat("species raster created")
+print("species raster created")
 #load packages
 library(raster)
 library(rgdal)
