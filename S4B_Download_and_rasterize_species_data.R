@@ -83,11 +83,11 @@ library(rgdal)
 US <- getData('GADM', country = 'USA', level=1)
 
 
-print("US map downloaded")
+cat("US map downloaded", fill=TRUE)
 #creating shapefile from speciesdata. Lat and lon are switched. CRS of US map is applied to species data
 speciesdataSP <- SpatialPointsDataFrame(speciesdata[,1:2], speciesdata, proj4string = crs(US))
 
-print("shapefile created")
+cat("shapefile created", fill=TRUE)
 #plot species data against US map
 plot(speciesdataSP)
 plot(US, add = TRUE)
@@ -107,7 +107,7 @@ USspeciesdata <- cropspeciesdataSP@data
 #why not save the file just in case?
 write.csv(USspeciesdata, "USspeciesdata.csv")
 
-print("USspecies data created")
+cat("USspecies data created", fill=TRUE)
 #making raster file
 #create empty raster based on cropspeciesdataSP
 #create values to plug into raster files
@@ -127,14 +127,14 @@ ncols <- ((lon_max - lon_min)/cell_size)+1; nrows <- ((lat_max - lat_min)/cell_s
 ##Is res being specified by the same thing as cell size above? If so, just use variable -chloe k.
 speciesraster <- raster(nrows=nrows, ncols=ncols, xmn=lon_min, xmx=lon_max, ymn=lat_min, ymx=lat_max, 
                      res=cell_size, crs="+proj=longlat +datum=WGS84")
-print("empty raster created")
+cat("empty raster created", fill=TRUE)
 #rasterize species data
 speciesraster <- rasterize(USspeciesdata, speciesraster, fun = "count")
 
 # save the data to the drive
 writeRaster(speciesraster, "species_raster", overwrite=TRUE)
 
-print("species raster created")
+cat("species raster created", fill=TRUE)
 #load packages
 library(raster)
 library(rgdal)
@@ -182,7 +182,7 @@ library(dismo)
 # elevation <- (elevation[[4]])
 # elevation <- resample(elevation, r.raster)
 elevation <- raster("elevation")
-cat("elevation raster loaded")
+cat("elevation raster loaded", fill=TRUE)
 ### solar radiation data (source: National Renewable Energy Laboratory)
 
 # make a temporary file, download the data, and unzip it
@@ -201,7 +201,7 @@ cat("elevation raster loaded")
 ##solradraster <- solradraster[speciesraster, ]
 
 solradraster <- raster("solradraster")
-cat("solrad raster loaded")
+cat("solrad raster loaded", fill=TRUE)
 ### soil type raster from NRCS, STATSTOGO.
 
 ## Because of the difficulty of working with the soils data, I have produced raster files we can just fit in
@@ -212,7 +212,7 @@ cat("solrad raster loaded")
 #soilsraster <- resample(soilsraster, r.raster)
 
 soilsraster <- raster("soilsraster")
-cat("soilsraster loaded")
+cat("soilsraster loaded", fill=TRUE)
 ### bio is a raster stack which includes all of the 12 worldclim variables, all of them having to do with
 # temperature and precipitation. These are the variables we're going to use as climate data. The 'CMIP5' data
 # uses the same variables as worldclim, giving us two raster stacks, present and future, which are the same
@@ -222,7 +222,7 @@ cat("soilsraster loaded")
 # download worldclim data and convert into a rasterstack
 presentclimstack <- getData('worldclim', download = TRUE, var = 'bio', res = 2.5)
 
-cat("present bioclim data downloaded")
+cat("present bioclim data downloaded", fill=TRUE)
 
 presentclimstack <- resample(presentclimstack, r.raster)
 crs(presentclimstack) <- crs(solradraster)
@@ -231,7 +231,7 @@ crs(presentclimstack) <- crs(solradraster)
 
 presentclimstack <- crop(presentclimstack, elevation)
 
-cat("present bioclim stack altered")
+cat("present bioclim stack altered", fill=TRUE)
 
 # add other layers to raster stack
 
@@ -241,7 +241,7 @@ presentclimbrick <- addLayer(presentclimstack, c(elevation, solradraster, soilsr
 
 writeRaster(presentclimbrick, "presentclimbrick", overwrite = TRUE)
 
-cat("present brick completed")
+cat("present brick completed", fill=TRUE)
 
 ### We're sourcing our climate projection data from CMIP5, the Coupled Model Intercomparison Project
 # I've chosen to use the GFDL data set from NOAA, with the representative concentration pathway (rcp) (how
@@ -256,17 +256,17 @@ cat("present brick completed")
 futureclimstack <- getData('CMIP5', var = 'bio', res = 2.5, rcp = 85, model = 'GF', download = TRUE, 
                         year = '50')
 
-cat("future clim data downloaded")
+cat("future clim data downloaded", fill=TRUE)
 
 futureclimstack <- resample(futureclimstack, r.raster)
 crs(futureclimstack) <- crs(solradraster)
 futureclimstack <- crop(futureclimstack, elevation)
 
-cat("future clim data altered")
+cat("future clim data altered", fill=TRUE)
 
 futureclimbrick <- addLayer(futureclimstack, c(elevation, solradraster, soilsraster))
 
-cat("future brick completed")
+cat("future brick completed", fill=TRUE)
 
 # write to file so you can use later. This is actually going to write two files and you're going to need both.
 writeRaster(futureclimbrick, "futureclimbrick", overwrite = TRUE)
@@ -280,7 +280,7 @@ backgrounddata <- randomPoints(presentclimbrick, 500)
 backgroundvalues <- extract(presentclimbrick, backgrounddata)
 presencebackground <- c(rep(1, nrow(speciespresent)), rep(0, nrow(backgroundvalues)))
 
-cat("dataframes for modeling created")
+cat("dataframes for modeling created", fill=TRUE)
 
 # make a new data frame of the occurrence values and the background values 
 speciesdistdata <- data.frame(cbind(presencebackground, rbind(speciespresent, backgroundvalues)))
