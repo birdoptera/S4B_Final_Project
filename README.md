@@ -25,11 +25,15 @@ Then, move the file "CONUS_brigh.tif" into your working directory.
 ## Dependencies
 This script has several R-package dependencies that need to be installed. Please install them before running the scrip, using:
 
-`install.packages("ridigbio")
+```install.packages("ridigbio")
+
 install.packages("rgbif")
+
 install.packages("raster")
+
 install.packages("rgdal")
-install.packages("dismo")`
+
+install.packages("dismo")```
 
 
 The file "CONUS_brigh.tif" should be in the GitHub files and download with the code. This is a color map of soil in the US. 
