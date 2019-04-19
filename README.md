@@ -1,5 +1,5 @@
 We created a script in R as part of our final project for the S4B.
-This script will allow you to download the occurence data for a taxa
+This script will allow you to download the occurrence data for a taxon
 and use climactic models to estimate current niche and predict how these will change in the future as a result of climate change. 
 
 Please note: in its current state, this script will only work for species distributions within the continental US.
@@ -44,22 +44,21 @@ Therefore, this script is only applicable in its current state to species (and t
 ## Default Models and Climate Data
 
 We are sourcing our climate projection data from CMIP5, the Coupled Model Intercomparison Project
-This specifically uses the GFDL data set from NOAA, with the representative concentration pathway (rcp) (how
+This specifically uses the GFDL data set from NOAA, with the representative concentration pathway (rcp; how
 severe the climate change is expected to be based on how much greenhouse gases are emitted.
-85 is the most extreme projection), with the year set to 50. There are other models, rcp, and year available,
+85 is the most extreme projection), with the year set to 50. There are other models, rcps, and years available.
 The options are given in the documentation for 'raster' and can be altered within the script to suit your purposes.
 
 
 # Testing
 
-Before beginning testing, install the above dependencies in R 3.5.1. Then run the script in R. There will be a prompt
-asking for the genus and species of the species you wish to examine. For this test, use Myzus persicae, a species with 
-good collection data.
+Before beginning testing, install the above dependencies in R 3.5.1. Then run the script in R. There will be two prompts
+asking for the genus and species, respectively, of the species you wish to examine. For this test, use "myzus" and "persicae", a species with good collection data.
 
 After each step and package there should have readout indicating which step has completed to allow for easier alterations 
 to the script to help customization.
 
-The first step in this script is gathering species occurence data from iDigBio and GBIF. We recommend testing that this data
+The first step in this script is gathering species occurrence data from iDigBio and GBIF. We recommend testing that this data
 is sufficient for your purposes before running the full script.
 
 Next niche information (such as soil type and landuse) is downloaded for the US. Again, this script is specifically for the US 
@@ -84,5 +83,5 @@ Run the script in R:
 
 Write in the prompt the genus and species you are interested in:
 
-`Myzuz persicae` #Species with a good collection data
+`Myzus persicae` #Species with a good collection data
 
