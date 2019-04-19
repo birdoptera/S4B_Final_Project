@@ -76,4 +76,13 @@ soil type raster from NRCS, STATSTOGO.
 Climate predictions are being used through WorldClim for present data and CMIP5 for future predictions,
 since they use the same variables and can be used to make comparisons.
 
+## Usage
+
+Run the script in R:
+
+`./S4B_life_new_distrubution_due_to_climatic_change.R`
+
+Write in the prompt the genus and species you are interested in:
+
+`Myzuz persicae` #Species with a good collection data
 
