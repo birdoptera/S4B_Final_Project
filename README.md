@@ -1,4 +1,5 @@
-Our final project is a script that will allow you to download the occurence data for a taxa
+We created a script in R as part of our final project for the S4B.
+This script will allow you to download the occurence data for a taxa
 and use climactic models to estimate current niche and predict how these will change in the future as a result of climate change. 
 
 Please note: in its current state, this script will only work for species distributions within the continental US.
@@ -11,6 +12,7 @@ To install the latest version directly from GitHub, go to:
 ## Additional Downloads and Instructions
 
 Before running this script, create a temporary working folder and set it as the working directory.
+i.e. `mkdir /scratch/USER_temp` 
 
 This script will require the manual download of a data files before running the script.
 
@@ -20,8 +22,9 @@ Then, move the file "CONUS_brigh.tif" into your working directory.
 
 
 ## Dependencies
-This script has several R-package dependencies that need to be installed. Please install them before running the script:
+This script has several R-package dependencies that need to be installed. Please install them before running the scrip, using:
 
+`install.packages("ridigbio")`
 ridigbio
 
 rgbif
