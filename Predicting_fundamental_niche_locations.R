@@ -1,3 +1,4 @@
+#!/bin/bash/Rscript
 
 ###to download and make a raster from species data
 ###documentation on ridigbio https://cran.r-project.org/web/packages/ridigbio/ridigbio.pdf
