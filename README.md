@@ -11,8 +11,9 @@ To install the latest version directly from GitHub, go to:
 
 ## Additional Downloads and Instructions
 
-Before running this script, create a temporary working folder and set it as the working directory.
-i.e. `mkdir /scratch/USER_temp` 
+Before running this script, create a temporary working folder and set it as the working directory .i.e. 
+
+`mkdir /scratch/USER_temp` 
 
 This script will require the manual download of a data files before running the script.
 
@@ -25,15 +26,11 @@ Then, move the file "CONUS_brigh.tif" into your working directory.
 This script has several R-package dependencies that need to be installed. Please install them before running the scrip, using:
 
 `install.packages("ridigbio")`
-ridigbio
+`install.packages("rgbif")`
+`install.packages("raster")`
+`install.packages("rgdal")`
+`install.packages("dismo")`
 
-rgbif
-
-raster
-
-rgdal
-
-dismo
 
 The file "CONUS_brigh.tif" should be in the GitHub files and download with the code. This is a color map of soil in the US. 
 Therefore, this script is only applicable in its current state to species (and their niches) within the US.
