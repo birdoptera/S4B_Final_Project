@@ -80,7 +80,7 @@ since they use the same variables and can be used to make comparisons.
 
 Run the script in R:
 
-`./S4B_life_new_distrubution_due_to_climatic_change.R`
+`Rscript Predicting_fundamental_niche_locations.R`
 
 Write in the prompt the genus and species you are interested in:
 
