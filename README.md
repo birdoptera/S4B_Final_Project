@@ -1,4 +1,5 @@
-OUR MAIN SCRIPT HAS BEEN RENAMED TO "PREDICTING_FUNDEMENTAL_NICHE_LOCATIONS.R" or something very similar
+# Updates
+OUR MAIN SCRIPT HAS BEEN RENAMED: "Predicting_fundamental_niche_locations.R"
 
 
 We created a script in R as part of our final project for the S4B.
