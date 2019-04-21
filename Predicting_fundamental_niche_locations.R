@@ -1,3 +1,6 @@
+#!/bin/bash/Rscript
+
+###This code was written on R 3.4.4 and tested on R 3.5.1
 
 ###to download and make a raster from species data
 ###documentation on ridigbio https://cran.r-project.org/web/packages/ridigbio/ridigbio.pdf

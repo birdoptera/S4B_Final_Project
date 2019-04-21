@@ -1,5 +1,10 @@
-Our final project is a script that will allow you to download the occurence data for a taxa
+We created a script in R as part of our final project for the S4B.
+This script will allow you to download the occurrence data for a taxon
 and use climactic models to estimate current niche and predict how these will change in the future as a result of climate change. 
+
+# Updates
+OUR MAIN SCRIPT HAS BEEN RENAMED: "Predicting_fundamental_niche_locations.R"
+
 
 Please note: in its current state, this script will only work for species distributions within the continental US.
 
@@ -10,7 +15,9 @@ To install the latest version directly from GitHub, go to:
 
 ## Additional Downloads and Instructions
 
-Before running this script, create a temporary working folder and set it as the working directory.
+Before running this script, create a temporary working folder and set it as the working directory .i.e. 
+
+`mkdir /scratch/USER_temp` 
 
 This script will require the manual download of a data files before running the script.
 
@@ -20,37 +27,42 @@ Then, move the file "CONUS_brigh.tif" into your working directory.
 
 
 ## Dependencies
-This script has several R-package dependencies that need to be installed. Please install them before running the script:
+This script has several R-package dependencies that need to be installed. Please install them before running the script, using:
 
-ridigbio
+```
+install.packages("ridigbio")
 
-rgbif
+install.packages("rgbif")
 
-raster
+install.packages("raster")
 
-rgdal
+install.packages("rgdal")
 
-dismo
+install.packages("dismo")
+```
+
 
 The file "CONUS_brigh.tif" should be in the GitHub files and download with the code. This is a color map of soil in the US. 
 Therefore, this script is only applicable in its current state to species (and their niches) within the US.
 
 ## Default Models and Climate Data
 
-We're sourcing our climate projection data from CMIP5, the Coupled Model Intercomparison Project
-This specifically uses the GFDL data set from NOAA, with the representative concentration pathway (rcp) (how
-severe the climate change is expected to be based on how much greenhouse gases are emitted.
-85 is the most extreme projection), with the year set to 50. There are other models, rcp, and year available,
+We are sourcing our climate projection data from [CMIP5](https://cmip.llnl.gov/cmip5/), the Coupled Model Intercomparison Project.
+This specifically uses the GFDL data set from NOAA, with the representative concentration pathway (rcp; how
+severe the climate change is expected to be based on how much greenhouse gases are emitted).
+The most extreme projection is 85, with the year set to 50. There are other models, rcps, and years available.
 The options are given in the documentation for 'raster' and can be altered within the script to suit your purposes.
 
 
 # Testing
 
-Before beginning testing, install the above dependencies in R 3.5.1. Then run the script in R. There will be a prompt
-asking for the genus and species of the species you wish to examine. For this test, use Myzus persicae, a species with 
-good collection data.
+Before beginning testing, install the above dependencies in R 3.5.1. Then run the script in R `Rscript Predicting_fundamental_niche_locations.R`. There will be two prompts
+asking for the genus and species, respectively, of the species you wish to examine. For this test, use "myzus" and "persicae", a species with good collection data.(See below in usage for more information)
 
-The first step in this script is gathering species occurence data from iDigBio and GBIF. We recommend testing that this data
+After each step and package there should have readout indicating which step has completed to allow for easier alterations 
+to the script to help customization.
+
+The first step in this script is gathering species occurrence data from iDigBio and GBIF. We recommend testing that this data
 is sufficient for your purposes before running the full script.
 
 Next niche information (such as soil type and landuse) is downloaded for the US. Again, this script is specifically for the US 
@@ -67,4 +79,13 @@ soil type raster from NRCS, STATSTOGO.
 Climate predictions are being used through WorldClim for present data and CMIP5 for future predictions,
 since they use the same variables and can be used to make comparisons.
 
+## Usage
+
+Run the script in R:
+
+`Rscript Predicting_fundamental_niche_locations.R`
+
+Write in the prompt the genus and species you are interested in:
+
+`Myzus persicae` #Species with a good collection data
 

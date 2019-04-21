@@ -1,3 +1,5 @@
+#!/bin/bash/Rscript 
+
 #load packages
 library(raster)
 library(rgdal)
