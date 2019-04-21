@@ -1,3 +1,6 @@
+OUR MAIN SCRIPT HAS BEEN RENAMED TO "PREDICTING_FUNDEMENTAL_NICHE_LOCATIONS.R" or something very similar
+
+
 We created a script in R as part of our final project for the S4B.
 This script will allow you to download the occurrence data for a taxon
 and use climactic models to estimate current niche and predict how these will change in the future as a result of climate change. 
