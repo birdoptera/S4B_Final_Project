@@ -49,8 +49,8 @@ Therefore, this script is only applicable in its current state to species (and t
 
 We are sourcing our climate projection data from [CMIP5](https://cmip.llnl.gov/cmip5/), the Coupled Model Intercomparison Project.
 This specifically uses the GFDL data set from NOAA, with the representative concentration pathway (rcp; how
-severe the climate change is expected to be based on how much greenhouse gases are emitted.
-85 is the most extreme projection), with the year set to 50. There are other models, rcps, and years available.
+severe the climate change is expected to be based on how much greenhouse gases are emitted).
+The most extreme projection is 85, with the year set to 50. There are other models, rcps, and years available.
 The options are given in the documentation for 'raster' and can be altered within the script to suit your purposes.
 
 
