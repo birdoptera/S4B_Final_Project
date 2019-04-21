@@ -56,8 +56,8 @@ The options are given in the documentation for 'raster' and can be altered withi
 
 # Testing
 
-Before beginning testing, install the above dependencies in R 3.5.1. Then run the script in R. There will be two prompts
-asking for the genus and species, respectively, of the species you wish to examine. For this test, use "myzus" and "persicae", a species with good collection data.
+Before beginning testing, install the above dependencies in R 3.5.1. Then run the script in R `Rscript Predicting_fundamental_niche_locations.R`. There will be two prompts
+asking for the genus and species, respectively, of the species you wish to examine. For this test, use "myzus" and "persicae", a species with good collection data.(See below in usage for more information)
 
 After each step and package there should have readout indicating which step has completed to allow for easier alterations 
 to the script to help customization.
