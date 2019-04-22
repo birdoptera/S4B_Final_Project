@@ -279,7 +279,7 @@ saveRDS(speciespresent, "pvals.Rds")
 #run a generalized linear model (we're running it with 5 factors: bio1 = annual mean temperature,
 # bio 12 = annual precipitation, USA1_msk_alt = elevation, layer = solar radiation, and CONUS_brigh = soil types)
 
-m1 <- glm(presencebackground ~ bio3 + bio5 + bio6 + bio12 + USA1_msk_alt + layer + CONUS_brigh, data = speciesdistdata)
+m1 <- glm(presencebackground ~ bio3 + bio5 + bio6 + bio12, data = speciesdistdata)
 
 #map the present possible distribution            
 p <- predict(presentclimbrick, m1)            
