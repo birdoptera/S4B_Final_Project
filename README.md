@@ -79,6 +79,11 @@ After the data is downloaded, the script then estimates current niche using dist
 
 There will be two plots showing the present and future estimated distribution. There will be a third plot that highlights the differences between the two plots.
 
+The example files are:
+name 
+name 2
+difference
+
 ## Usage
 
 Run the script in R:
