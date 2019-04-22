@@ -1,7 +1,7 @@
 We created a script in R as part of our final project for the Auburn University course Scripting for Biologists. This script will allow you to download the occurrence data for a taxon and use climactic models to estimate current niche and predict how these will change in the future as a result of climate change. 
 
 # Updates
-For this project, you will run the main script: "Predicting_fundamental_niche_locations.R"
+For this project, you will run the main script: `Predicting_fundamental_niche_locations.R`
 
 
 Please note: in its current state, this script will only work for species distributions within the continental US. It is currently configuered to prompt the user for a binomial species name, but this can be altered to encompass other taxonomic levels, such as genus.
