@@ -36,31 +36,24 @@ head(datum_idigbio)
 
 write.csv(datum_idigbio, "datum_idigbio.csv")
 
-<<<<<<< HEAD
-=======
 # these are inserts to let you know where the file stopped working
 cat("idigbio finished", fill=TRUE)
 
 ## START of Iwo's edits
 
->>>>>>> 47e8be09f64b71e7ec4a89be76c3cbaa4fc3630e
 #install and load package
 # install.packages("rgbif")
 library(rgbif)
 
-<<<<<<< HEAD
 ##ok, ran this script and it errored out here with the message:
 ##Error in loadNamespace(j <- i[[1L]], c(lib.loc, .libPaths()), versionCheck = vI[[j]]) : 
 ##  namespace ‘curl’ 3.2 is already loaded, but >= 3.3 is required
 ##does anyone know what went wrong here and how we can fix it -chloe
 
 #search for all GBIF records of a given "[Genus] [species]". Returns a long/lat matrix with up to 5000 results, including US records with location data (no NAs) only
-=======
-#search for all GBIF records of a given "[Genus] [species]"
 ## I included an exaggerated limit of 5000 bc the default is 500 (too low), and the "per request maximum" is 300 -Iwo
 ## I don't understand that part of the help page on CRAN, but "5000" does the trick so I'm sticking with it -Iwo
 ## I figured it out. This is a better command: hard-coded variables, returns up to 5000 records with long/lat data only, not necessary to remove NA cases later -Iwo
->>>>>>> 47e8be09f64b71e7ec4a89be76c3cbaa4fc3630e
 datum_gbif <- occ_search(scientificName = sprintf("%s %s", genus, species), country= "us", return = "data",limit="5000", hasCoordinate=TRUE, fields=c('decimalLongitude','decimalLatitude'))
 
 #check your data
@@ -80,13 +73,10 @@ speciesdata <- speciesdata[complete.cases(speciesdata), ]
 #save it so you don't have to download it all over again
 write.csv(speciesdata, "speciesdata.csv")
 
-<<<<<<< HEAD
-=======
 cat("speciesdata finished", fill=TRUE)
 
 ## END of Iwo's edits 
 
->>>>>>> 47e8be09f64b71e7ec4a89be76c3cbaa4fc3630e
 ###convert your data into a raster map
 
 #load these packages

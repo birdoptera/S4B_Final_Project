@@ -1,0 +1,31 @@
+summary(m1)
+
+Call:
+glm(formula = presencebackground ~ bio1 + bio12 + USA1_msk_alt + 
+    layer + CONUS_brigh, data = speciesdistdata)
+
+Deviance Residuals: 
+     Min        1Q    Median        3Q       Max  
+-1.11130   0.02226   0.03147   0.06547   0.73555  
+
+Coefficients:
+               Estimate Std. Error t value Pr(>|t|)    
+(Intercept)   1.050e+00  4.166e-02  25.199  < 2e-16 ***
+bio1         -2.530e-04  1.970e-04  -1.284  0.19904    
+bio12         5.390e-05  1.730e-05   3.116  0.00185 ** 
+USA1_msk_alt -2.526e-04  1.584e-05 -15.947  < 2e-16 ***
+layer         2.158e-02  1.012e-02   2.132  0.03303 *  
+CONUS_brigh  -1.284e-03  1.531e-04  -8.388  < 2e-16 ***
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+(Dispersion parameter for gaussian family taken to be 0.05372439)
+
+    Null deviance: 332.56  on 5214  degrees of freedom
+Residual deviance: 279.85  on 5209  degrees of freedom
+  (187 observations deleted due to missingness)
+AIC: -440.55
+
+Number of Fisher Scoring iterations: 2
+
+
