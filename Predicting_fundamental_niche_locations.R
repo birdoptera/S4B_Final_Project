@@ -290,7 +290,6 @@ plot(p)
 f <- predict(futureclimbrick, m1)            
 plot(f)
 
-
 #Save plot_present to wd in .ps format
 plotp <- sprintf("%s_%s_%s", genus, species, "plot_present.jpg") 
 jpeg(plotp)
@@ -303,6 +302,15 @@ plotf <- sprintf("%s_%s_%s", genus, species, "plot_future.jpg")
 jpeg(plotf)
 plot(f)
 plot(cropspeciesdataSP, pch = '.', add = TRUE) 
+dev.off()
+
+d <- overlay(f,p,fun=function(r1, r2){return(r1-r2)})
+
+#Save plot_diff to wd in .jpg format
+plotd <- sprintf("%s_%s_%s", genus, species, "plot_diff.jpg")
+jpeg(plotd)
+plot(d)
+plot(cropspeciesdataSP, pch = '.', add = TRUE)
 dev.off()
 
 cat("SDM plots saved", fill=TRUE)
