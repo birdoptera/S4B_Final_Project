@@ -1,12 +1,10 @@
-We created a script in R as part of our final project for the S4B.
-This script will allow you to download the occurrence data for a taxon
-and use climactic models to estimate current niche and predict how these will change in the future as a result of climate change. 
+We created a script in R as part of our final project for the Auburn University course Scripting for Biologists. This script will allow you to download the occurrence data for a taxon and use climactic models to estimate current niche and predict how these will change in the future as a result of climate change. 
 
 # Updates
 For this project, you will run the main script: "Predicting_fundamental_niche_locations.R"
 
 
-Please note: in its current state, this script will only work for species distributions within the continental US.
+Please note: in its current state, this script will only work for species distributions within the continental US. It is currently configuered to prompt the user for a binomial species name, but this can be altered to encompass other taxonomic levels, such as genus.
 
 # Installation
 
@@ -47,11 +45,7 @@ Therefore, this script is only applicable in its current state to species (and t
 
 ## Default Models and Climate Data
 
-We are sourcing our climate projection data from [CMIP5](https://cmip.llnl.gov/cmip5/), the Coupled Model Intercomparison Project.
-This specifically uses the GFDL data set from NOAA, with the representative concentration pathway (rcp; how
-severe the climate change is expected to be based on the volume of greenhouse gases emitted).
-The most extreme projection is 85, with the year set to 50. There are other models, rcps, and years available.
-The options are given in the documentation for 'raster' and can be altered within the script to suit your purposes.
+We are sourcing our climate projection data from [CMIP5](https://cmip.llnl.gov/cmip5/), the Coupled Model Intercomparison Project. This specifically uses the GFDL data set from NOAA, with the representative concentration pathway (abrieviated rcp, it indicates how severe the climate change is expected to be based on the volume of greenhouse gases emitted). The most extreme projection is 85, with the year set to 50. There are other models, rcps, and years available. The options are given in the documentation for 'raster' and can be altered within the script to suit your purposes.
 
 
 # Testing
@@ -72,7 +66,7 @@ soil type raster from NRCS, STATSTOGO.
 
 Climate predictions are being used through WorldClim for present data and CMIP5 for future predictions, since they use the same variables and can be used to make comparisons.
 
-The script then estimates current niche using distribution and current climate and uses this information to predict the future areas this species will be found. The final results are two models specifying the distribution of the target taxa, here Myzus persicae.
+The script then estimates current niche using distribution and current climate and uses this information to predict the future areas this species will be found. The final results are two models specifying the distribution of the target species, here Myzus persicae.
 
 ## Usage
 
