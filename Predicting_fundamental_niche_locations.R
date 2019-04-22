@@ -311,10 +311,12 @@ plot(p)
 f <- predict(futureclimbrick, m1)            
 plot(f)
 
+#Save plot_present to wd in .ps format
 postscript("plot_present.ps")
 plot(p)
 dev.off()
 
+#Save plot_future to wd in .ps format
 postscript("plot_future.ps")
 plot(f)
 dev.off()
@@ -327,7 +329,7 @@ summary(m1)
 #Done
 cat("Done", fill=TRUE)
 
-#maybe find a way to plot the occurance data on both plots?
+#maybe find a way to plot the occurrence data on both plots?
 
 #maybe we could do some kind of model evaluation? like splitting the data into 2 parts, running one and trying to use that to predict the other?
 
