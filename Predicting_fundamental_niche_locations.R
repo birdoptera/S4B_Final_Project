@@ -279,7 +279,7 @@ saveRDS(speciespresent, "pvals.Rds")
 #run a generalized linear model (we're running it with 5 factors: bio1 = annual mean temperature,
 # bio 12 = annual precipitation, USA1_msk_alt = elevation, layer = solar radiation, and CONUS_brigh = soil types)
 
-m1 <- glm(presencebackground ~ bio1 + bio12 + USA1_msk_alt + layer + CONUS_brigh, data = speciesdistdata)
+m1 <- glm(presencebackground ~ bio5 + bio6 + bio12 + USA1_msk_alt + layer + CONUS_brigh, data = speciesdistdata)
 
 #map the present possible distribution            
 p <- predict(presentclimbrick, m1)            
@@ -295,14 +295,14 @@ plot(f)
 plotp <- sprintf("%s_%s_%s", genus, species, "plot_present.jpg") 
 jpeg(plotp)
 plot(p)
-plot(cropspeciesdataSP, add = TRUE) 
+plot(cropspeciesdataSP, pch= '.', add = TRUE) 
 dev.off()
 
 #Save plot_future to wd in .ps format
 plotf <- sprintf("%s_%s_%s", genus, species, "plot_future.jpg")
 jpeg(plotf)
 plot(f)
-plot(cropspeciesdataSP, add = TRUE) 
+plot(cropspeciesdataSP, pch = '.', add = TRUE) 
 dev.off()
 
 cat("SDM plots saved", fill=TRUE)
