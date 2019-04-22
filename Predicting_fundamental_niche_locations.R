@@ -256,9 +256,14 @@ cat("present brick completed", fill=TRUE)
 
 ## This might be overkill considering our deadline is imminent, but including prompts to choose (and hard-code) from a selection
 ## of rcps, model datasets, and scenario years wouldn't be too difficult.- Iwo 
+cat("Enter how many years in the future you want the model to predict: 50 or 70 ")
+year <- readLines("stdin", n=1)
+cat("Enter which prediction of how much radiative forcing there 
+will be in 2100 (based on when carbon emissions begin to decrease- the smaller numbers decrease sooner: 26, 45, 85):  ")
+rpc <- readLines("stdin", n=1)
 
-futureclimstack <- getData('CMIP5', var = 'bio', res = 2.5, rcp = 85, model = 'GF', download = TRUE, 
-                        year = '50')
+futureclimstack <- getData('CMIP5', var = 'bio', res = 2.5, rcp = rcp, model = 'GF', download = TRUE, 
+                        year = year)
 
 cat("future clim data downloaded", fill=TRUE)
 
@@ -314,14 +319,17 @@ plot(p)
 f <- predict(futureclimbrick, m1)            
 plot(f)
 
+
 #Save plot_present to wd in .ps format
 postscript("plot_present.ps")
 plot(p)
+plot(cropspeciesdata, add = TRUE) 
 dev.off()
 
 #Save plot_future to wd in .ps format
 postscript("plot_future.ps")
 plot(f)
+plot(cropspeciesdata, add = TRUE) 
 dev.off()
 
 cat("SDM plots saved", fill=TRUE)
