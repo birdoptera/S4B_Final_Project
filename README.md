@@ -79,10 +79,12 @@ After the data is downloaded, the script then estimates current niche using dist
 
 There will be two plots showing the present and future estimated distribution. There will be a third plot that highlights the differences between the two plots.
 
-The example files are:
-name 
-name 2
-difference
+The example files for Myzus persicae are:
+`Myzus_persicae_plot_present.jpg`
+`Myzus_persicae_plot_future.jpg`
+`Myzus_persicae_plot_diff.jpg`
+
+If you would like to run additional tests, we have also included the results for _Tsuga canadensis_ and _Anole carolinensis_.
 
 ## Usage
 
