@@ -290,20 +290,21 @@ plot(p)
 f <- predict(futureclimbrick, m1)            
 plot(f)
 
-#Save plot_present to wd in .ps format
+#Save plot_present to wd in .jpg format
 plotp <- sprintf("%s_%s_%s", genus, species, "plot_present.jpg") 
 jpeg(plotp)
 plot(p)
 plot(cropspeciesdataSP, pch= '.', add = TRUE) 
 dev.off()
 
-#Save plot_future to wd in .ps format
+#Save plot_future to wd in .jpg format
 plotf <- sprintf("%s_%s_%s", genus, species, "plot_future.jpg")
 jpeg(plotf)
 plot(f)
 plot(cropspeciesdataSP, pch = '.', add = TRUE) 
 dev.off()
 
+#Plots the differences among present and future raster scenarios
 d <- overlay(f,p,fun=function(r1, r2){return(r1-r2)})
 
 #Save plot_diff to wd in .jpg format
