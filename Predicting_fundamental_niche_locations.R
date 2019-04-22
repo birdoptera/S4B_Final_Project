@@ -302,8 +302,6 @@ saveRDS(speciespresent, "pvals.Rds")
 
 m1 <- glm(presencebackground ~ bio1 + bio12 + USA1_msk_alt + layer + CONUS_brigh, data = speciesdistdata)
 
-
-
 #map the present possible distribution            
 p <- predict(presentclimbrick, m1)            
 #figure out a way to output plots
@@ -311,7 +309,23 @@ plot(p)
 
 #map the future possible distribution
 f <- predict(futureclimbrick, m1)            
-plot(f)            
+plot(f)
+
+postscript("plot_present.ps")
+plot(p)
+dev.off()
+
+postscript("plot_future.ps")
+plot(f)
+dev.off()
+
+cat("SDM plots saved", fill=TRUE)
+
+#print glm summary
+summary(m1)
+
+#Done
+cat("Done", fill=TRUE)
 
 #maybe find a way to plot the occurance data on both plots?
 
