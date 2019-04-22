@@ -2,7 +2,6 @@
 
 ###This code was written on R 3.4.4 and tested on R 3.5.1
 
-###to download and make a raster from species data
 ###documentation on ridigbio https://cran.r-project.org/web/packages/ridigbio/ridigbio.pdf
 
 #load package 
@@ -17,7 +16,6 @@ library(ridigbio)
 #'genus' and 'specificEpithet' to the 'fields' to check for errors.
 
 #Prompt for genus and species
-## the original code for this wasn't working in my terminal, so I switched it to this and commented out the originals
 cat("Enter a genus name: ")
 genus <- readLines("stdin", n=1)
 cat("Enter a species name: ")
@@ -26,7 +24,6 @@ species <- readLines("stdin", n=1)
 ##species <- readline(prompt= "Enter the species part of a species name: ")
 
 #I chose Myzus persicae (pea aphid) because I know it's a common pest and so would have good collection data 
-## I added hard-coded nomenclature variables and a limit parameter. The latter probably isn't necessary since idigbio is a smaller database, but it might save time for larger species datasets -Iwo
 datum_idigbio <- idig_search_records(rq = list(geopoint=list(type="exists"), genus = sprintf("%s", genus)), "data.dwc:specificEpithet" = sprintf("%s", species), fields = c("geopoint"), limit=5000)
 
 #check your data
@@ -39,21 +36,12 @@ write.csv(datum_idigbio, "datum_idigbio.csv")
 # these are inserts to let you know where the file stopped working
 cat("idigbio finished", fill=TRUE)
 
-## START of Iwo's edits
-
 #install and load package
 # install.packages("rgbif")
 library(rgbif)
 
-##ok, ran this script and it errored out here with the message:
-##Error in loadNamespace(j <- i[[1L]], c(lib.loc, .libPaths()), versionCheck = vI[[j]]) : 
-##  namespace ‘curl’ 3.2 is already loaded, but >= 3.3 is required
-##does anyone know what went wrong here and how we can fix it -chloe
-
 #search for all GBIF records of a given "[Genus] [species]". Returns a long/lat matrix with up to 5000 results, including US records with location data (no NAs) only
-## I included an exaggerated limit of 5000 bc the default is 500 (too low), and the "per request maximum" is 300 -Iwo
-## I don't understand that part of the help page on CRAN, but "5000" does the trick so I'm sticking with it -Iwo
-## I figured it out. This is a better command: hard-coded variables, returns up to 5000 records with long/lat data only, not necessary to remove NA cases later -Iwo
+
 datum_gbif <- occ_search(scientificName = sprintf("%s %s", genus, species), country= "us", return = "data",limit="5000", hasCoordinate=TRUE, fields=c('decimalLongitude','decimalLatitude'))
 
 #check your data
@@ -75,7 +63,6 @@ write.csv(speciesdata, "speciesdata.csv")
 
 cat("speciesdata finished", fill=TRUE)
 
-## END of Iwo's edits 
 
 ###convert your data into a raster map
 
@@ -101,11 +88,6 @@ plot(US, add = TRUE)
 #crops species data to only include data collected in the US
 cropspeciesdataSP <- speciesdataSP[US, ]
 
-# do this if you are running this line by line
-#plot cropped data against US map
-#plot(cropspeciesdataSP, pch = '.')
-#plot(US, add = TRUE)
-
 #saves only the data portion of the shapefile as a dataframe. Basically, the cropped portion of the 
 #original datafile
 USspeciesdata <- cropspeciesdataSP@data
@@ -130,7 +112,6 @@ lon_min <- -159.77; lon_max <- -68.01; lat_min <- 21.30; lat_max <- 48.43
 ncols <- ((lon_max - lon_min)/cell_size)+1; nrows <- ((lat_max - lat_min)/cell_size)+1
 
 #create an empty raster
-##Is res being specified by the same thing as cell size above? If so, just use variable -chloe k.
 speciesraster <- raster(nrows=nrows, ncols=ncols, xmn=lon_min, xmx=lon_max, ymn=lat_min, ymx=lat_max, 
                      res=cell_size, crs="+proj=longlat +datum=WGS84")
 cat("empty raster created", fill=TRUE)
@@ -163,13 +144,6 @@ library(dismo)
 ### (present in present, future in future).
 
 ### Constructing non-climatic environmental niches
-
-
-# This script involves a lot of downloads. This script will only work if you create a temporary directory,
-# set it as your working directory. This will also make it easier to delete the downloads when you are done.
-
-# Before you begin, go to https://nrcs.app.box.com/v/soils/folder/53525984812 and download the file soil_color_CONUS_v2.zip. 
-# Extract the file "CONUS_brigh.tif" into your working directory.
 
 # elevation data (source: the data is from NASA, processed by CGIAR-CSI http://srtm.csi.cgiar.org/)
 
@@ -209,8 +183,6 @@ cat("elevation raster loaded", fill=TRUE)
 solradraster <- raster("solradraster")
 cat("solrad raster loaded", fill=TRUE)
 ### soil type raster from NRCS, STATSTOGO.
-
-## Because of the difficulty of working with the soils data, I have produced raster files we can just fit in
 
 # load the soils data
 #soilsraster <- raster("CONUS_brigh.tif")
@@ -306,7 +278,6 @@ saveRDS(speciespresent, "pvals.Rds")
 
 #run a generalized linear model (we're running it with 5 factors: bio1 = annual mean temperature,
 # bio 12 = annual precipitation, USA1_msk_alt = elevation, layer = solar radiation, and CONUS_brigh = soil types)
-## these names are terrible. To change them you have to change the names of the climbricks
 
 m1 <- glm(presencebackground ~ bio1 + bio12 + USA1_msk_alt + layer + CONUS_brigh, data = speciesdistdata)
 
@@ -321,15 +292,15 @@ plot(f)
 
 
 #Save plot_present to wd in .ps format
-plotp <- sprintf("%s_%s_%s", genus, species, "plot_present.ps") 
-postscript(plotp)
+plotp <- sprintf("%s_%s_%s", genus, species, "plot_present.jpg") 
+jpeg(plotp)
 plot(p)
 plot(cropspeciesdataSP, add = TRUE) 
 dev.off()
 
 #Save plot_future to wd in .ps format
-plotf <- sprintf("%s_%s_%s", genus, species, "plot_future.ps")
-postscript(plotf)
+plotf <- sprintf("%s_%s_%s", genus, species, "plot_future.jpg")
+jpeg(plotf)
 plot(f)
 plot(cropspeciesdataSP, add = TRUE) 
 dev.off()
@@ -341,8 +312,4 @@ summary(m1)
 
 #Done
 cat("Done", fill=TRUE)
-
-#maybe find a way to plot the occurrence data on both plots?
-
-#maybe we could do some kind of model evaluation? like splitting the data into 2 parts, running one and trying to use that to predict the other?
 
