@@ -13,7 +13,7 @@ To install the latest version directly from GitHub, go to:
 
 ## Additional Downloads and Instructions
 
-Before running this script, create a temporary working folder and set it as the working directory .i.e. 
+Before running this script, create a temporary working folder and set it as the working directory, i.e. 
 
 `mkdir /scratch/USER_temp` 
 
@@ -66,7 +66,7 @@ soil type raster from NRCS, STATSTOGO.
 
 Climate predictions are being used through WorldClim for present data and CMIP5 for future predictions, since they use the same variables and can be used to make comparisons.
 
-The script then estimates current niche using distribution and current climate and uses this information to predict the future areas this species will be found. The final results are two models specifying the distribution of the target species, here Myzus persicae.
+The script then estimates current niche using distribution and current climate and uses this information to predict the future areas this species will be found. The final results are two models specifying the distribution of the target species, here _Myzus persicae_.
 
 ## Usage
 
