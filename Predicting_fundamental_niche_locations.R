@@ -314,14 +314,21 @@ plot(p)
 f <- predict(futureclimbrick, m1)            
 plot(f)
 
-#Save plot_present to wd in .ps format
-postscript("plot_present.ps")
+#Save plot_present to wd in .jpg format
+jpeg("plot_present.jpg")
 plot(p)
 dev.off()
 
-#Save plot_future to wd in .ps format
-postscript("plot_future.ps")
+#Save plot_future to wd in .jpg format
+jpeg("plot_future.jpg")
 plot(f)
+dev.off()
+
+d <- overlay(f,p,fun=function(r1, r2){return(r1-r2)})
+
+#Save plot_diff to wd in .jpg format
+jpeg("plot_diff2.jpg")
+plot(d)
 dev.off()
 
 cat("SDM plots saved", fill=TRUE)
