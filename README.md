@@ -50,6 +50,11 @@ We are sourcing our climate projection data from [CMIP5](https://cmip.llnl.gov/c
 
 # Testing
 
+In the Alabama Supercomputer system, to load R, type the command:
+`module load R/3.5.1`
+
+You can then launch R using the command:`R`
+
 Before beginning testing, install the above dependencies in R 3.5.1. Then run the script in R `Rscript Predicting_fundamental_niche_locations.R`. There will be two prompts asking for the genus and species, respectively, of the species you wish to examine. For this test, use "Myzus" and "persicae", a species with good collection data.(See below in usage for more information)
 
 After each step and package there should have readout indicating which step has completed to allow for easier alterations to the script to help customization.
@@ -62,11 +67,22 @@ The script then sets specifications and downloads data for these climate variabl
 
 solar radiation data (source: National Renewable Energy Laboratory)
 
-soil type raster from NRCS, STATSTOGO.
+soil type raster (source: NRCS, STATSTOGO)
 
 Climate predictions are being used through WorldClim for present data and CMIP5 for future predictions, since they use the same variables and can be used to make comparisons.
 
-The script then estimates current niche using distribution and current climate and uses this information to predict the future areas this species will be found. The final results are two models specifying the distribution of the target species, here _Myzus persicae_.
+There will be two additional prompts as the script runs, the first asks for how many years out the CMIP5 prediction should be. The second will ask you to specify an rcp (which is a measure of how extreme the climate change should be based on differing levels of greenhouse gases emitted, for further information, see the CMIP5 website).
+
+In our examples, we select 70 years in the future and a rcp of 85, the most extreme example.
+
+After the data is downloaded, the script then estimates current niche using distribution and current climate and uses this information to predict the future areas this species will be found. The final results are two models specifying the distribution of the target species, here _Myzus persicae_.
+
+There will be two plots showing the present and future estimated distribution. There will be a third plot that highlights the differences between the two plots.
+
+The example files are:
+name 
+name 2
+difference
 
 ## Usage
 
