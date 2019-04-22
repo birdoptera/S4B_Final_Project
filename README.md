@@ -94,5 +94,13 @@ Run the script in R:
 
 Write in the prompt the genus and species you are interested in:
 
-`Myzus persicae` (to test the code is working as expected).
+`Myzus persicae` (or any of the two other test species, to test the code is working as expected).
+
+Then, specify years into the future (again to test code is working):
+
+`70`
+
+Finally, specify the rcp (for testing purposes):
+
+`85`
 
